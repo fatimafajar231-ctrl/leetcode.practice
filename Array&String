@@ -1,0 +1,61 @@
+/*You are given two strings word1 and word2. Merge the strings by adding letters in alternating order, starting with
+word1. If a string is longer than the other, append the additional letters onto the end of the merged string.
+
+Return the merged string.*/
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+string mergeAlternately(string word1, string word2) {
+    string result;
+    int i = 0, j = 0;
+    int n1 = word1.size(), n2 = word2.size();
+    
+    // Merge characters alternately
+    while (i < n1 || j < n2) {
+        if (i < n1) result += word1[i++];
+        if (j < n2) result += word2[j++];
+    }
+    
+    return result;
+}
+
+int main() {
+    cout << mergeAlternately("abc", "pqr") << endl;    // Output: apbqcr
+    cout << mergeAlternately("ab", "pqrs") << endl;    // Output: apbqrs
+    cout << mergeAlternately("abcd", "pq") << endl;    // Output: apbqcd
+    return 0;
+}
+
+
+
+/*For two strings s and t, we say "t divides s" if and only if s = t + t + t + ... + t + t (i.e., t is concatenated
+with itself one or more times).
+
+Given two strings str1 and str2, return the largest string x such that x divides both str1 and str2.*/
+
+#include <iostream>
+#include <string>
+#include <numeric>  // for std::gcd
+
+using namespace std;
+
+string gcdOfStrings(string str1, string str2) {
+    // Check if str1 and str2 can be formed by repeating the same base string
+    if (str1 + str2 != str2 + str1)
+        return "";
+
+    // Find the greatest common divisor of their lengths
+    int gcdLength = gcd(str1.size(), str2.size());
+
+    // The GCD string is the prefix of that length from either string
+    return str1.substr(0, gcdLength);
+}
+
+int main() {
+    cout << gcdOfStrings("ABCABC", "ABC") << endl;     // Output: ABC
+    cout << gcdOfStrings("ABABAB", "ABAB") << endl;    // Output: AB
+    cout << gcdOfStrings("LEET", "CODE") << endl;      // Output: (empty)
+    return 0;
+}
