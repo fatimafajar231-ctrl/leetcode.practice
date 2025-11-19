@@ -4,17 +4,21 @@ Return a boolean array result of length n, where result[i] is true if, after giv
 
 Note that multiple kids can have the greatest number of candies.*/
 
-#include <vector>
-#include <algorithm>
-using namespace std;
+class Solution {
+public:
+    vector<bool> kidsWithCandies(vector<int>& candies, int extraCandies) {
+        // Find out the greatest number of candies among all the kids.
+        int maxCandies = 0;
+        for (int candy : candies) {
+            maxCandies = max(maxCandies, candy);
+        }
+        // For each kid, check if they will have greatest number of candies
+        // among all the kids.
+        vector<bool> result;
+        for (int candy : candies) {
+            result.push_back(candy + extraCandies >= maxCandies);
+        }
 
-vector<bool> kidsWithCandies(vector<int>& candies, int extraCandies) {
-    int maxCandies = *max_element(candies.begin(), candies.end());
-    vector<bool> result;
-
-    for (int candy : candies) {
-        result.push_back(candy + extraCandies >= maxCandies);
+        return result;
     }
-
-    return result;
-}
+};
