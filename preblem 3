@@ -22,3 +22,32 @@ public:
         return result;
     }
 };
+
+
+
+class Solution {
+    public List<Boolean> kidsWithCandies(int[] candies, int extraCandies) {
+
+        // Find the maximum number of candies any kid currently has
+        int max = -1;
+        for (int c : candies) {
+            if (c > max) {
+                max = c;
+            }
+        }
+
+        // Create result list
+        List<Boolean> result = new ArrayList<>();
+
+        // Check each kid
+        for (int c : candies) {
+            if (c + extraCandies >= max) {
+                result.add(true);
+            } else {
+                result.add(false);
+            }
+        }
+
+        return result;
+    }
+}
