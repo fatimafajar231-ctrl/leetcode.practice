@@ -1,0 +1,29 @@
+// Given an array of integers arr, return true if the number of occurrences of each value in the array is unique or false otherwise.//
+
+#include <vector>
+#include <unordered_map>
+#include <unordered_set>
+using namespace std;
+
+class Solution {
+public:
+    bool uniqueOccurrences(vector<int>& arr) {
+        unordered_map<int, int> freq;
+        
+        // Count frequency of each number
+        for (int num : arr) {
+            freq[num]++;
+        }
+        
+        // Check if all frequency counts are unique
+        unordered_set<int> seen;
+        for (auto& [num, count] : freq) {
+            if (seen.count(count)) {
+                return false;
+            }
+            seen.insert(count);
+        }
+        
+        return true;
+    }
+};
